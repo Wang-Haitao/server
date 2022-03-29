@@ -1,0 +1,7 @@
+ok
+creat manager threade successfully
+creat 140411670730496 worker pthread successfully
+creat 140411662337792 worker pthread successfully
+creat 140411653945088 worker pthread successfully
+creat 140411645552384 worker pthread successfully
+creat threadpool successfully
