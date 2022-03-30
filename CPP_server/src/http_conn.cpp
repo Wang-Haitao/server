@@ -161,6 +161,8 @@ void http_conn::process()
     m_ev->reactor->event_set_add(m_ev, m_ev->fd, EPOLLOUT);
 }
 
+//-------------------------------请求解析----------------------------//
+
 //解析http请求
 HTTP_CODE http_conn::process_read()
 {
@@ -324,6 +326,9 @@ LINE_STATE http_conn::parse_line()
     return LINE_INCOM;
 }
 
+
+//--------------------------------获取文件--------------------------//
+
 /*  当得到一个完整、正确的HTTP请求时，我们就分析目标文件的属性，
     如果目标文件存在、对所有用户可读，且不是目录，则使用mmap将其
     映射到内存地址m_file处，获取文件成功
@@ -370,6 +375,8 @@ void http_conn::unmap()
         m_file_address = 0;
     }
 }
+
+//--------------------------------写回请求--------------------------//
 
 // 往写缓冲中写入待发送的数据
 bool http_conn::add_response(const char* format, ...)
@@ -431,7 +438,6 @@ bool http_conn::add_content_type()
 {
     return add_response("Content-Type:%s\r\n", "text/html");
 }
-
 
 // 根据服务器处理HTTP请求的结果，决定返回给客户端的内容
 bool http_conn::process_write(HTTP_CODE ret)
